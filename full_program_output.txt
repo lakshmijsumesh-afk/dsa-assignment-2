@@ -1,0 +1,244 @@
+================================================================
+ PART (a): INSERTION INTO HASH TABLE (Division Method, size=10)
+ h(key) = key mod 10
+================================================================
+
+Inserted 105 at index 5. Table now:
+  [ 0] -> EMPTY
+  [ 1] -> EMPTY
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> 105
+  [ 6] -> EMPTY
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+
+Inserted 210 at index 0. Table now:
+  [ 0] -> 210
+  [ 1] -> EMPTY
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> 105
+  [ 6] -> EMPTY
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+
+  >>> COLLISION: Song ID 315 also hashes to index 5 (already occupied) -> chained.
+Inserted 315 at index 5. Table now:
+  [ 0] -> 210
+  [ 1] -> EMPTY
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> 105 -> 315
+  [ 6] -> EMPTY
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+
+  >>> COLLISION: Song ID 420 also hashes to index 0 (already occupied) -> chained.
+Inserted 420 at index 0. Table now:
+  [ 0] -> 210 -> 420
+  [ 1] -> EMPTY
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> 105 -> 315
+  [ 6] -> EMPTY
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+
+  >>> COLLISION: Song ID 525 also hashes to index 5 (already occupied) -> chained.
+Inserted 525 at index 5. Table now:
+  [ 0] -> 210 -> 420
+  [ 1] -> EMPTY
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> 105 -> 315 -> 525
+  [ 6] -> EMPTY
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+
+  >>> COLLISION: Song ID 630 also hashes to index 0 (already occupied) -> chained.
+Inserted 630 at index 0. Table now:
+  [ 0] -> 210 -> 420 -> 630
+  [ 1] -> EMPTY
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> 105 -> 315 -> 525
+  [ 6] -> EMPTY
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+
+  >>> COLLISION: Song ID 735 also hashes to index 5 (already occupied) -> chained.
+Inserted 735 at index 5. Table now:
+  [ 0] -> 210 -> 420 -> 630
+  [ 1] -> EMPTY
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> 105 -> 315 -> 525 -> 735
+  [ 6] -> EMPTY
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+
+  >>> COLLISION: Song ID 840 also hashes to index 0 (already occupied) -> chained.
+Inserted 840 at index 0. Table now:
+  [ 0] -> 210 -> 420 -> 630 -> 840
+  [ 1] -> EMPTY
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> 105 -> 315 -> 525 -> 735
+  [ 6] -> EMPTY
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+
+Total collisions during insertion: 6
+Load factor = n/m = 8/10 = 0.80
+
+================================================================
+ PART (b): SEARCH COMPARISON - Hashing vs Linear Search
+================================================================
+
+Key        Found?     Hash Comparisons   Found?     Linear Comparisons
+---------------------------------------------------------------
+420        Yes        3                  Yes        4                 
+735        Yes        5                  Yes        7                 
+105        Yes        2                  Yes        1                 
+999        No         1                  No         8                 
+
+Total comparisons -> Hashing: 11   Linear Search: 20
+Average comparisons -> Hashing: 2.75   Linear Search: 5.00
+
+================================================================
+ BONUS: Re-hashing with a PRIME table size (11) to test effect
+ of table-size choice on collisions -> h(key) = key mod 11
+================================================================
+
+  105 mod 11 = 6
+  210 mod 11 = 1
+  315 mod 11 = 7
+  420 mod 11 = 2
+  525 mod 11 = 8
+  630 mod 11 = 3
+  735 mod 11 = 9
+  840 mod 11 = 4
+
+Inserted 105 at index 6. Table now:
+  [ 0] -> EMPTY
+  [ 1] -> EMPTY
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> EMPTY
+  [ 6] -> 105
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+  [10] -> EMPTY
+
+Inserted 210 at index 1. Table now:
+  [ 0] -> EMPTY
+  [ 1] -> 210
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> EMPTY
+  [ 6] -> 105
+  [ 7] -> EMPTY
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+  [10] -> EMPTY
+
+Inserted 315 at index 7. Table now:
+  [ 0] -> EMPTY
+  [ 1] -> 210
+  [ 2] -> EMPTY
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> EMPTY
+  [ 6] -> 105
+  [ 7] -> 315
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+  [10] -> EMPTY
+
+Inserted 420 at index 2. Table now:
+  [ 0] -> EMPTY
+  [ 1] -> 210
+  [ 2] -> 420
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> EMPTY
+  [ 6] -> 105
+  [ 7] -> 315
+  [ 8] -> EMPTY
+  [ 9] -> EMPTY
+  [10] -> EMPTY
+
+Inserted 525 at index 8. Table now:
+  [ 0] -> EMPTY
+  [ 1] -> 210
+  [ 2] -> 420
+  [ 3] -> EMPTY
+  [ 4] -> EMPTY
+  [ 5] -> EMPTY
+  [ 6] -> 105
+  [ 7] -> 315
+  [ 8] -> 525
+  [ 9] -> EMPTY
+  [10] -> EMPTY
+
+Inserted 630 at index 3. Table now:
+  [ 0] -> EMPTY
+  [ 1] -> 210
+  [ 2] -> 420
+  [ 3] -> 630
+  [ 4] -> EMPTY
+  [ 5] -> EMPTY
+  [ 6] -> 105
+  [ 7] -> 315
+  [ 8] -> 525
+  [ 9] -> EMPTY
+  [10] -> EMPTY
+
+Inserted 735 at index 9. Table now:
+  [ 0] -> EMPTY
+  [ 1] -> 210
+  [ 2] -> 420
+  [ 3] -> 630
+  [ 4] -> EMPTY
+  [ 5] -> EMPTY
+  [ 6] -> 105
+  [ 7] -> 315
+  [ 8] -> 525
+  [ 9] -> 735
+  [10] -> EMPTY
+
+Inserted 840 at index 4. Table now:
+  [ 0] -> EMPTY
+  [ 1] -> 210
+  [ 2] -> 420
+  [ 3] -> 630
+  [ 4] -> 840
+  [ 5] -> EMPTY
+  [ 6] -> 105
+  [ 7] -> 315
+  [ 8] -> 525
+  [ 9] -> 735
+  [10] -> EMPTY
+
+Total collisions with table size 11: 0
+Load factor = 8/11 = 0.73
